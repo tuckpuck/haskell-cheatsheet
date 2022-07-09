@@ -5,6 +5,7 @@
 -- :r or :reload to reload a file
 -- :t or :type to check type signature
 -- :i or :info to check type or type class
+-- :k or :kind is the type of the type
 -- :q or :quit to leave ghci
 -- :? to see all commands
 
