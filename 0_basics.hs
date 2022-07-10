@@ -66,3 +66,40 @@
 -- False
 -- == - equal
 -- /= - not equal
+
+
+-- * Tools and Ecosystem
+-- GHCup is the Installer for Haskell tools 
+-- HLS is the Haskell Language Server. In VS Code this is built into the Haskell plug-in
+-- You can create a new project using cabal, stack, or summoner
+-- You can build using 'cabal build' or 'stack build'
+-- Packages are defined in .cabal file
+-- Stackage provides sets of Haskell packages that are known to build together. LTS is the recommended version, Nightly is one version ahead of that.
+-- Hackage is the repository of Haskell packages and their documentation
+
+-- * Haskell compilers
+-- GHC from Glasgow. This is the de facto standard
+-- Helium and UHC from Utrecht
+-- Mu used internally
+-- LHC, JHC are not maintained 
+
+-- * Haskell Standard
+-- Current standard is Haskell 2010
+-- Previous standard was Haskell 98
+
+-- * Extensions
+-- Extensions are added first thing in the file
+-- They look like this: {-# language MultiParamTypeClasses #-}
+-- Some are defined as stable by the GHC steering committee
+-- These include: 
+-- Syntactical goodies
+-- Type classes with multiple params
+-- Type families
+-- More ways to use deriving
+-- Many more...
+
+-- * Main Players
+-- GHC Team, who builds the compiler
+-- Haskell Foundation, who promotes Haskell
+-- Haskell Language Server team
+-- Several working groups: Haskell.org, Core Library Committee, GHC steering committee
