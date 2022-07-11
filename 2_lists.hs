@@ -136,6 +136,14 @@ listInListConcat = listInList ++ [[13,14,15,16]] --[[1,2,3,4],[5,6,7,8],[9,10,11
 -- Add another list within a list to the front
 listInListCons = [2,3,5] : listInList --[[2,3,5],[1,2,3,4],[5,6,7,8],[9,10,11,12]]
 
+helloWorld = "hello" ++ "world" --"helloworld"
+listWorld = ["hello", "world"] ++ ["g","m"] --["hello","world","g","m"]
+consString = 'h':"ello" --consString
+consList = "hello " : ["world"] --["hello ","world"]
+
+
+lists = [["a", "b"], ["c","f"]] 
+lists2 = lists ++ [["m", "h"]] --[["a","b"],["c","f"],["m","h"]]
 
 -- Best practice is often to create a safe version of a function
 -- Ex. native head function does not handle empty list [] as an input
