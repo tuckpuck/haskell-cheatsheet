@@ -32,6 +32,10 @@
 -- Function without parameters is called a definition
 -- ex. helloWorld = "Hello World"
 
+-- Haskell is a single assignment language - This means variables cannot change once set
+-- Because of this 'variables' are technically called identifiers
+-- Setting an identifier is called binding instead of assigning
+
 
 -- * Functional vs Imperative
 -- Imperative performs mutation of state by assignment of variables. Tell the program what to do.
