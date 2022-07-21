@@ -107,3 +107,12 @@
 -- Haskell Foundation, who promotes Haskell
 -- Haskell Language Server team
 -- Several working groups: Haskell.org, Core Library Committee, GHC steering committee
+
+-- * Lazy Evaluation
+-- Lazy evaluation ensures that expressions are only evaluated when they are needed. 
+-- Lazy eval combines normal order evaluation and sharing. Function arguments are not evaluated until it is needed in the body of a function. Pattern matching determines when the arguments are needed.
+-- Normal order evaluation means evaluation happens from the outermost function to the innermost function. Other languages like JS and C use Applicative-Order Evaluation, which evaluates innermost to outermost. If an expression is reducible to a value, both methods will give the same result.
+-- Sharing is the practice of temporarily storing or memoizing results in normal order eval to avoid repeat computation.
+-- For example, due to lazy evaluation the expression fst (2, [1..]) will never touch the infinite loop. Only the 2 is necessary.
+
+
