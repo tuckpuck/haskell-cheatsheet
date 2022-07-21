@@ -36,11 +36,9 @@
 -- Because of this 'variables' are technically called identifiers
 -- Setting an identifier is called binding instead of assigning
 
-
 -- * Functional vs Imperative
 -- Imperative performs mutation of state by assignment of variables. Tell the program what to do.
 -- Functional emulates mutation of state by transformation of values by applying functions. Tell the program what everything is. 
-
 
 -- * Haskell compared to JS
 -- No loops
@@ -51,7 +49,6 @@
 -- No arrays
 -- Functions can have only 0 or 1 arguments
 
-
 -- * Steps when coding haskell
 -- Analyse the problem
 -- Divide and Conquer: Divide in smaller problems if possible
@@ -61,7 +58,6 @@
 -- Consider the inputs
 -- Code your functions
 
-
 -- * Logic Operators
 -- && - Boolean and
 -- || - Boolean or 
@@ -70,7 +66,6 @@
 -- False
 -- == - equal
 -- /= - not equal
-
 
 -- * Tools and Ecosystem
 -- GHCup is the Installer for Haskell tools 
