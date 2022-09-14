@@ -59,8 +59,8 @@
 -- Code your functions
 
 -- * Logic Operators
--- && - Boolean and
--- || - Boolean or 
+-- && - Boolean and. Returns True if both the boolean to its left and right are True
+-- || - Boolean or. returns True if either one of them is True
 -- not - negate 
 -- True
 -- False

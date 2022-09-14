@@ -66,13 +66,6 @@ findSum = sum [1,2,3,4,5,6,7,8,9,10] --55
 -- Product takes a list of numbers and returns their product
 findProduct = product [1,2,3,4,5,6,7,8,9,10] --3628800
 
--- You can use an infinite list for one zip param because Haskell will stop at the length of the shorter list
-zipInf = zip [1..] ["one", "two", "three", "four"] --[(1,"one"),(2,"two"),(3,"three"),(4,"four")]
-zipInf2 = zip [1,2,3,4,5,6] (cycle [0,1,2]) --[(1,0),(2,1),(3,2),(4,0),(5,1),(6,2)]
-
--- zipWith takes an argument and runs it on the pairs
-zipListsWith = zipWith (+) [1..10] [1..10] --[2,4,6,8,10,12,14,16,18,20]
-
 -- Ranges allows you to create lists iteratively using the .. operator
 numRange = [1..15] --[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
 charRange = ['a'..'x'] --"abcdefghijklmnopqrstuvwx"
@@ -83,6 +76,15 @@ charRangeCap = ['A'..'X'] --"ABCDEFGHIJKLMNOPQRSTUVWX"
 countByTwo = [2,4..20] --[2,4,6,8,10,12,14,16,18,20]
 countByThree = [3,6..20] --[3,6,9,12,15,18]
 everyOtherLetter = ['a', 'c'..'z'] --"acegikmoqsuwy"
+
+-- Infinite lists can be created by making a range with no upper limit
+infiniteList = [1..]
+-- You can use an infinite list for one zip param because Haskell will stop at the length of the shorter list
+zipInf = zip [1..] ["one", "two", "three", "four"] --[(1,"one"),(2,"two"),(3,"three"),(4,"four")]
+zipInf2 = zip [1,2,3,4,5,6] (cycle [0,1,2]) --[(1,0),(2,1),(3,2),(4,0),(5,1),(6,2)]
+
+-- zipWith takes an argument and runs it on the pairs
+zipListsWith = zipWith (+) [1..10] [1..10] --[2,4,6,8,10,12,14,16,18,20]
 
 -- To make a descending list, you must use steps. Otherwise it will increment instead of decrement and end up as an empty list
 -- This works:
@@ -111,8 +113,9 @@ comp5 = [3,4,2]==[3,4,2] -- True
 comp6 = [] > [1] --False
 
 -- List concatenation operators
--- The cons operator adds an element to the beginning of a list
+-- The cons operator (:) adds an element to the beginning of a list
 -- Much faster than adding to end of big list (because Haskell then has to go through entire list)
+listOf3 = 1 : [2,3]
 listOf10 = (:) 1 [2..10] --[1,2,3,4,5,6,7,8,9,10]
 listOf1 = (:) 1 [] --[1]
 
@@ -150,6 +153,19 @@ lists2 = lists ++ [["m", "h"]] --[["a","b"],["c","f"],["m","h"]]
 -- Instead it will throw an exception.
 -- A safe function will handle all cases without breaking program
 
+-- Joining and breaking text
+-- Words is used to break up a string to list of words
+breakUpString :: String -> [String]
+breakUpString word = words word
+-- Unwords joins a list of words with seperating spaces
+joinStrings :: [String] -> String
+joinStrings list = unwords list
+-- Lines splits the argument into a list of lines with newline (\n) characters
+splitIntoListOnNewline :: String -> [String]
+splitIntoListOnNewline str = lines str
+-- Unlines creates a String from list of Strings by appending  newline (\n) characters. 
+listToStringAddNewline :: [String] -> String
+listToStringAddNewline list = unlines list
 
 
 -- * Some List functions
@@ -160,7 +176,7 @@ lengthOfList :: [a] -> Int
 lengthOfList lst = length lst
 
 checkIfListEmpty :: [a] -> Bool
-checkIfListEmpty lst = null lst
+checkIfListEmpty list = null list
 
 reverseString :: String -> String
 reverseString str = reverse str
