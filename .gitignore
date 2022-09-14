@@ -2,3 +2,5 @@
 .netlify
 # DS Store
 .DS_Store
+# Scratchpad
+scratch.hs
