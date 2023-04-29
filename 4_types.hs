@@ -1,11 +1,12 @@
 -- * Type Info
--- Types are like a label that is attached to data in an expression and limits what that data can do. To attach them, use :: operator
--- The :: operator is read as "has type of" and denotes a type signature. 
+-- Types are like a label that is attached to data that defines and limits what that data can do. To attach them, use :: operator
+-- The line with the :: operator is a type signature, it is read as "has type of". 
 -- The type of any expression, value, or function can be explicitly stated
--- Types of variables and functions are inferred if not stated explicitly
 -- There is no untyped data in Haskell
+-- Types of variables and functions are inferred if not stated explicitly. Haskell's compiler is very good at this. 
 -- Code behaves more predictably due to the focus on types
 -- Every expression's type is known at compile time. If there are types that don't work, the program won't compile
+-- Type checking is the process of verifying and enforcing constraints on types. This helps avoid preventable mistakes. 
 
 
 -- * Native Types
@@ -45,7 +46,6 @@ maybeType = Just 10 --Maybe Integer
 eitherType = Left 34 --Either Integer b
 orderingType = LT --Ordering
 
-
 -- * Checking Type
 -- :t command is used to tell what type something is
 -- :t 'a' returns Char
@@ -53,7 +53,6 @@ orderingType = LT --Ordering
 -- :t "HELLO!" returns [Char]
 -- :t (True, 'a') returns (Bool, Char)
 -- :t 4 == 5 returns Bool
-
 
 -- * Type variables aka polymorphism
 -- If a function works on multiple types, it will use type variables rather than explicit defined types
@@ -69,7 +68,6 @@ orderingType = LT --Ordering
 -- The below is another way of saying that "Bob" and name are interchangeable throughout the rest of the program in the same scope. 
 name :: String
 name = "Bob"
-
 
 -- * Function definitions
 -- Functions can be given a name and explicit type signature (first line) and a name and function definition (second line)

@@ -26,6 +26,7 @@ getLast = last [1,2,3,4,5] --5
 
 -- Take returns n elements from the start of the list
 takeElems = take 3 [1,2,3,4,5,6,7] --[1,2,3]
+takeXElems x = take x [1..]
 
 -- Drop removes n elements from the start of the list and returns the rest
 dropElems = drop 3 [1,2,3,4,5,6,7] --[4,5,6,7]

@@ -11,52 +11,60 @@
 
 -- if defining a variable in ghci, use let before (ex let a = 1)
 
--- * Haskell Language
--- Haskell is a pure functional programming language
--- No assignment statements
--- No variables 
--- Once given a value, value never changes
--- No side effects at all, only calculate and return result
--- Haskell is lazy. Won't execute functions unless they are called.
+-- * Haskell as a pure language
+-- Haskell is a pure functional programming language. 
+-- Pure functions depend only on their provided arguments, not any other global or local state. 
+-- Functions are modular and have no side effects. 
+-- If given the same input they will always produce the same output. 
+-- These properties make code less error prone
+-- Makes parallel or concurrent computing easier because functions can't interfere with one another. 
+-- To allow for side effects such as network communication or I/O, you can tag it as IO in the type system. 
 
--- Strives for modularity
--- Output will always be the same given an input
--- No concept of time
--- Reason about code with ease
--- Just follow types
+-- * Haskell as a lazy language
+-- Lazy evaluation ensures that expressions are only evaluated when they are needed. 
+-- Lazy eval combines normal order evaluation and sharing. Function arguments are not evaluated until it is needed in the body of a function. Pattern matching determines when the arguments are needed.
+-- Normal order evaluation means evaluation happens from the outermost function to the innermost function. Other languages like JS and C use Applicative-Order Evaluation, which evaluates innermost to outermost. If an expression is reducible to a value, both methods will give the same result.
+-- Sharing is the practice of temporarily storing or memoizing results in normal order eval to avoid repeat computation.
+-- For example, due to lazy evaluation the expression fst (2, [1..]) will never touch the infinite loop. Only the 2 is necessary.
 
--- Haskell is statically typed. Compiler knows data type of different items in code, allowing errors to be caught at compile time.
+-- * Other properties of Haskell
+-- Haskell is statically typed. This means that code and types are checked at compile-time. Compiler knows data type of different items in code, allowing errors to be caught when compiled. 
 -- Haskell uses type inference, which allows it to figure out which data is which type. 
--- Haskell is elegant and concise, with programs usually shorter than imperative equivalent. Easy to maintain and less bugs.
--- Haskell is built of functions, and we compose them together to get the functionality of the program. 
+-- No concept of time
+
+-- * Variables aka Definitions or Identifiers
 -- Function without parameters is called a definition
 -- ex. helloWorld = "Hello World"
-
 -- Haskell is a single assignment language - This means variables cannot change once set
 -- Because of this 'variables' are technically called identifiers
 -- Setting an identifier is called binding instead of assigning
+
+-- * Haskell Programs
+-- Haskell is built of functions, and we compose them together to get the functionality of the program. 
+-- Function composition is taking the result of one function and giving it to the next.
 
 -- * Functional vs Imperative
 -- Imperative performs mutation of state by assignment of variables. Tell the program what to do.
 -- Functional emulates mutation of state by transformation of values by applying functions. Tell the program what everything is. 
 
 -- * Haskell compared to JS
--- No loops
--- No if 
--- Functions is a single return
--- No side effects (we can do this by separating pure functional and dirty IO)
--- No assignments within variables
--- No arrays
--- Functions can have only 0 or 1 arguments
+-- Haskell has no loops
+-- Haskell ha no if statements
+-- Haskell has no arrays
+-- Haskell function results in a single return
+-- Haskell functions have no side effects. (pure functional and dirty IO are separated)
+-- Haskell functions can have only 0 or 1 arguments
+-- Haskell programs usually shorter than imperative equivalent 
+-- Easy to maintain, reason about code, and less bugs
+-- Haskell is statically typed, meaning it checks code at compile-time. JS is dynamcially typed, meaning it checks code at run-time. 
 
--- * Steps when coding haskell
--- Analyse the problem
--- Divide and Conquer: Divide in smaller problems if possible
--- Consider the types
--- Consider the process (the evaluation process..)
--- Consider the identities and basecases
--- Consider the inputs
--- Code your functions
+-- * Comments
+-- Comments are created using --
+{- 
+Multi-line 
+comments are created
+using {--}
+-}
 
 -- * Logic Operators
 -- && - Boolean and. Returns True if both the boolean to its left and right are True
@@ -67,9 +75,30 @@
 -- == - equal
 -- /= - not equal
 
+-- * Indentation 
+-- Haskell is indentation sensitive. Spaces, tabs, and newlines matter. 
+-- Each nested expression should be indented further
+
+-- * Functions
+-- Parameters are separated with spaces, both when defining and using the function
+-- Everything after = is the function body
+-- First letter of a function's name has to be lowercase
+-- Parenthesis are used to prioritize calculations
+
+-- * Steps when coding haskell
+-- Analyze the problem
+-- Divide and Conquer: Divide in smaller problems if possible
+-- Consider the types
+-- Consider the process (the evaluation process..)
+-- Consider the identities and base cases
+-- Consider the inputs
+-- Code your functions
+
 -- * Tools and Ecosystem
 -- GHCup is the Installer for Haskell tools 
 -- HLS is the Haskell Language Server. In VS Code this is built into the Haskell plug-in
+
+-- * Haskell package managers
 -- You can create a new project using cabal, stack, or summoner
 -- You can build using 'cabal build' or 'stack build'
 -- Packages are defined in .cabal file
@@ -102,12 +131,4 @@
 -- Haskell Foundation, who promotes Haskell
 -- Haskell Language Server team
 -- Several working groups: Haskell.org, Core Library Committee, GHC steering committee
-
--- * Lazy Evaluation
--- Lazy evaluation ensures that expressions are only evaluated when they are needed. 
--- Lazy eval combines normal order evaluation and sharing. Function arguments are not evaluated until it is needed in the body of a function. Pattern matching determines when the arguments are needed.
--- Normal order evaluation means evaluation happens from the outermost function to the innermost function. Other languages like JS and C use Applicative-Order Evaluation, which evaluates innermost to outermost. If an expression is reducible to a value, both methods will give the same result.
--- Sharing is the practice of temporarily storing or memoizing results in normal order eval to avoid repeat computation.
--- For example, due to lazy evaluation the expression fst (2, [1..]) will never touch the infinite loop. Only the 2 is necessary.
-
 

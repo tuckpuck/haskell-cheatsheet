@@ -13,3 +13,9 @@ findMaximum = max 111 222 --222
 divisionMod = 92 `div` 10 --9
 -- Use standard divide operator to get a fractional return
 divisionExact = 92 / 10 --9.2
+-- Check for greater or less than and return a boolean
+greaterThan18 x = x > 18
+-- Calculate volume of cylinder
+volumeOfACylinder r h = pi * r ^ 2 * h 
+-- Convert fahrenheit to celsius. 
+fToC x = (x - 32) * 5 / 9
