@@ -15,7 +15,7 @@ division = 10 `div` 3 --3
 -- Mod - mod gets the remainder after a division
 modulus = 10 `mod` 3 --1
 
--- Exponentiation
+-- Exponentiation - The '^' operator takes an Integral b and Num a, and returns a Num.
 exponentiation = 3 ^ 3 --27
 
 -- Minimum - takes 2 parameters, returns the smaller one

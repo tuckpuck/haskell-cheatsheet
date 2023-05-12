@@ -116,5 +116,4 @@ length' (x:xs) = 1 + length xs
 
 -- Fst is another example where 'a' and 'b' are are polymorphic types because the types within the tuple can be any type.
 fst' :: (a, b) -> b
-fst' (_, y) = y
-\
+fst' (_, y) = 
