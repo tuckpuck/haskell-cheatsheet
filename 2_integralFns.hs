@@ -17,6 +17,9 @@ modulus = 10 `mod` 3 --1
 
 -- Exponentiation - The '^' operator takes an Integral b and Num a, and returns a Num.
 exponentiation = 3 ^ 3 --27
+-- (^2) is (\x -> x ^ 2) but (2^) is (\x -> 2 ^ x)
+exp1 = (^2) 7
+exp2 = (2^) 7
 
 -- Minimum - takes 2 parameters, returns the smaller one
 findMin = min 111 222 --111
@@ -40,6 +43,7 @@ getAbs' = abs (10) --10
 -- negate - returns the opposite of the value given, whether positive or negative.
 negateValue = negate (10) --(-10)
 negateValue' = negate (-10) --(10)
+
 
 -- even - test whether an Integer value is even.
 isEven = even 10 --True

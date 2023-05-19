@@ -1,5 +1,5 @@
 -- * Native Fractional Functions
--- / is the is the divide operator, gives a fractional return
+-- Standard / divide operator produces a fractional return
 divisionExact = 92 / 10 --9.2
 
 -- sqrt takes a number of type a and returns its square root. The type provided must be must be an instance of the Floating class, which includes Float and Double.
