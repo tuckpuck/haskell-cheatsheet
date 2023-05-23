@@ -1,3 +1,11 @@
+-- * How lists are constructed
+-- Lists are constructed by the : operator, and are decomposed by head and tail functions
+isSame = [1,2,3,4] == 1 : (2 : (3 : (4 :[])))
+
+isSame2 = 2 : (3 : (4 : (5 : (6 : (7 : []))))) == [2,3,4,5,6,7]
+checkHead = head (2 : (3 : (4 : (5 : (6 : (7 : []))))))
+checkTail = tail (2 : (3 : (4 : (5 : (6 : (7 : []))))))
+
 -- * Native List Functions
 -- Get a specific element from a list using !!. Starts at index 0. 
 item3 = [1,2,3,4,5,6] !! 2 --3
