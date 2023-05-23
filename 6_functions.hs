@@ -57,47 +57,6 @@ myName = "Tucker Triggs"
 countdown :: [Int] -> [Int]
 countdown x = (reverse . sort) x
 
--- * Patterns 
--- Patterns allow us to destructure values and capture variables
--- Patterns can be applied to tuples
-reverseTuple :: (x, y) -> (y, x)
-reverseTuple (x, y) = (y, x)
-
-fst :: (a, b) -> a
-fst (a, _) = a
-
-snd :: (a,b) -> b
-snd (_, b) = b
-
--- Patterns can be applied to lists
-isSame = [1,2,3,4] == 1 : (2 : (3 : (4 :[])))
--- Lists are constructed by the : operator, and are decomposed by head and tail functions
-
-isSame2 = 2 : (3 : (4 : (5 : (6 : (7 : []))))) == [2,3,4,5,6,7]
-checkHead = head (2 : (3 : (4 : (5 : (6 : (7 : []))))))
-checkTail = tail (2 : (3 : (4 : (5 : (6 : (7 : []))))))
-
--- Common pattern to deconstruct Int or Char lists
-splitIntList :: [a] -> [a]
-splitIntList [] = []
-splitIntList (y:ys) = ys
-
-splitCharList :: [a] -> [a]
-splitCharList [] = []
-splitCharList (y:ys) = ys
-
--- Can be used to get certain items out of a list
-getHead :: [a] -> a
-getHead (x:xs) = x
-
-getTail :: [a] -> [a]
-getTail (y:ys) = ys
-
-getFirstFromCharList = getHead ['w','o','r','l','d']
-getTailFromCharList = getTail ['w','o','r','l','d']
-getFirstFromIntList =  getHead [2,3,4,5]
-getTailFromIntList = getTail [2,3,4,5]
-
 -- * Safe functions
 -- Often best practice is often to create a safe version of a function
 -- A safe function will handle all cases without breaking program
@@ -123,12 +82,81 @@ getLast (x:xs) = Just (last xs)
 -- ex. foldl' is the strict version of foldl
 
 -- * Pattern matching
-findLength :: Num a => [a] -> a
-findLength [] = 0
-findLength (x:xs) = 1 + findLength xs
+-- Matching data (values, types, etc) against a pattern
+-- Optionally you can bind variables to successful matches
+-- You must provide pattern matches for all possible scenarios. 
+-- Haskell matches from top to bottom, so the first definition will match the top one if it matches multiple. 
 
-second :: (a,b,c) -> b
-second (_,y,_) = y
+-- Catch-all patterns allow you to provide a default case if a provided param does not match anything else. 
+-- If you don't care what the value will be, you can use _ as the catchall. 
+
+-- Pattern matching strings
+birthday :: Int -> [Char]
+birthday 1 = "Welcome to the world"
+birthday 18 = "You're an adult"
+birthday 55 = "You're an adult fr fr"
+birthday age = "Happy birthday, you are " ++ show age
+
+-- Pattern matching lists
+whatsInsideThisList:: [Int] -> String
+whatsInsideThisList [] = "It's empty!"
+whatsInsideThisList [x] = "A single element: " ++ show x
+whatsInsideThisList [x, y] = "Two elements: " ++ show x ++ " and " ++ show y ++ "."
+whatsInsideThisList (x:y:z:[]) = "The list has three elements: " ++ show [x, y, z]
+whatsInsideThisList (x:rest) = "The first element is: " ++ show x ++ ", and the rest are " ++ show rest
+list1=whatsInsideThisList [] -- "It's empty!"
+list2=whatsInsideThisList [1, 2] -- "Two elements: 1 and 2"
+list3=whatsInsideThisList [1, 2, 3] -- "The list has three elements: [1,2,3]"
+list4=whatsInsideThisList [1, 2, 3, 4] -- "The first element is: 1, and there are qui
+
+-- With lists, you can create a catchall using this syntax (_:_:c:_), the final _ means it doesn't matter what is after this or how many elements are after this.
+getThirdFromList :: [Int] -> [Int]
+getThirdFromList [] = [-1]
+getThirdFromList [_] = [-1]
+getThirdFromList [_,_] = [-1]
+getThirdFromList [_,_,c] = [c]
+getThirdFromList (_:_:c:_) = [c]
+
+initials':: String -> String -> String
+initials' (f:_) (l:_) = [f] ++ "." ++ [l] ++ "."
+initials' _ _ = "How was your name again?"
+getIntials = initials' "nikola" "tesla"
+
+findLengthRecusively :: Num a => [a] -> a
+findLengthRecusively [] = 0
+findLengthRecusively (x:xs) = 1 + findLengthRecusively xs
+
+-- Common pattern to deconstruct Int or Char lists
+splitIntList :: [a] -> [a]
+splitIntList [] = []
+splitIntList (y:ys) = ys
+
+splitCharList :: [a] -> [a]
+splitCharList [] = []
+splitCharList (y:ys) = ys
+
+-- Can be used to get certain items out of a list
+getHead :: [a] -> a
+getHead (x:xs) = x
+
+getTail :: [a] -> [a]
+getTail (y:ys) = ys
+
+-- Pattern matching Tuples
+getSecondFromTuple :: (a,b,c) -> b
+getSecondFromTuple (_,y,_) = y
+
+changeTuple :: (a,b,c,d) -> (b,d)
+changeTuple (_,x,_,y) = (x, y)
+
+reverseTuple :: (x, y) -> (y, x)
+reverseTuple (x, y) = (y, x)
+
+fst :: (a, b) -> a
+fst (a, _) = a
+
+snd :: (a,b) -> b
+snd (_, b) = b
 
 -- * Currying
 -- All functions with multiple arguments are actually currying
