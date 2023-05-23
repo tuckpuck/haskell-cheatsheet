@@ -86,6 +86,8 @@ getLast (x:xs) = Just (last xs)
 -- Optionally you can bind variables to successful matches
 -- You must provide pattern matches for all possible scenarios. 
 -- Haskell matches from top to bottom, so the first definition will match the top one if it matches multiple. 
+-- Pattern matching is straightforward to do different things depending on the structure or value of the arguments. Also makes it easy to extract certain values from tuples and lists. 
+
 
 -- Catch-all patterns allow you to provide a default case if a provided param does not match anything else. 
 -- If you don't care what the value will be, you can use _ as the catchall. 
@@ -284,6 +286,29 @@ analyzeCylinder diameter height
                 | otherwise = "What in the world is that huge thing?!"
               where
                 volume = pi * diameter^2 * height / 4
+
+-- Case statement
+-- Execute a specific block of code based on a variable's value
+-- case <Exp> of <Pattern1> -> <Result1>
+--               <Pattern1> -> <Result1>
+--               <Pattern1> -> <Result1>
+
+checkForZeroes :: (Int, Int, Int) -> String
+checkForZeroes tuple3 = case tuple3 of
+                          (0, _, _) -> "The first one is a zero!"
+                          (_, 0, _) -> "The second one is a zero!"
+                          (_,_,0) -> "The third one is a zero"
+                          _ -> "Please provide a tuple of"
+
+-- You can do most of the same things using pattern matching, but case statements have the advantage they can be used anywhere an expression can: 
+checkForZeros' :: (Int, Int, Int) -> String
+checkForZeros' tuple3 = "The " ++ show tuple3 ++ " has " ++
+    case tuple3 of
+        (0, _, _) -> "a zero as its first element"
+        (_, 0, _) -> "a zero as its second element"
+        (_, _, 0) -> "a zero as its third element"
+        _  -> "no zeroes!"
+checkzeros = checkForZeros' (32,0,256)
 
 
 -- * More function examples
