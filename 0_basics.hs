@@ -1,5 +1,5 @@
 -- * GHCI commands
--- ghci is an interactive command line environment, in which Haskell expressions can be interactively evaluated and programs can be interpreted
+-- ghci is an interactive command line environment or a REPL, in which Haskell expressions can be interactively evaluated and programs can be interpreted. 
 -- run `gchi` to start compiler
 -- run `ghci learn-you-a-haskell.hs` to load a certain file
 -- :l or :load to load a file once in GHCI
@@ -26,9 +26,17 @@
 -- For example, due to lazy evaluation the expression fst (2, [1..]) will never touch the infinite loop
 
 -- * Other properties of Haskell
--- Haskell is statically typed. This means that code and types are checked at compile-time. Compiler knows data type of different items in code, allowing errors to be caught when compiled
+-- Haskell is a general purpose language with many programs written in it
+-- Haskell is of the older programming languages, development began in 1987. First major version was released in 1998. 2010 is the latest version. Haskell foundation continues to add features and maintain the language 
+-- Haskell is statically typed. This means that code and types are checked at compile-time. Compiler knows data type of different items in code, allowing errors to be caught when compiled. 
 -- For data that isn't explicitly given a type, Haskell uses type inference, which allows it to infer the types of data
+-- Automatic memory management
 -- No concept of time
+-- Named after Haskell Curry to honor his work in Lambda calculus 
+
+-- * Evaluating expressions vs code compilation
+-- Expression is a piece of code that can be evaluated into a value. Just because it is evaluated does not mean it is compiled
+-- When code is compiled, it is optimized into a binary or assembly code that is most easily run by the processor. Problems will be caught at this compilation step. 
 
 -- * Haskell programs
 -- Haskell is built of functions, and we compose them together to get the functionality of the program
@@ -41,9 +49,10 @@
 -- * Haskell compared to JS
 -- Haskell has no loops, instead recursion is used
 -- Haskell has no arrays, instead lists offer some of the same features 
--- Haskell functions result in a single return
--- Haskell functions have no side effects. In Haskell pure functional and dirty IO are separated
--- Haskell functions can have only 0 or 1 arguments, though having more arguments are mimicked through currying
+-- Haskell functions give a single return value without side effects. In Haskell pure functional and "dirty" IO are separated
+-- Haskell functions can have only 0 or 1 arguments, though having more arguments are mimicked through currying, or by passing a list or tuple of values
+-- Haskell definitions cannot be changed, the are constant. JS variables are often made to change
+-- In Haskell, every value has a type and the type of the value cannot change
 -- Haskell programs usually shorter than imperative equivalent 
 -- Haskell is easier to maintain, reason about code, and less bugs
 -- Haskell is statically typed, meaning it checks code at compile-time. JS is dynamically typed, meaning it checks code at run-time

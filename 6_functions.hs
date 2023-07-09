@@ -11,7 +11,7 @@ import Data.List
 addNums :: Int -> Int -> Int
 addNums x y = x + y 
 
--- * Definitions, Names, or Identifiers (aka Variables)
+-- * Definitions, Names, or Identifiers (AKA variables in other languages)
 -- Definitions are functions that don't take any parameters and return just a specific piece of data. 
 -- They are like variables in other languages, but are technically functions.
 -- You can supply a type signature to ensure that the provided data is the expected type. 

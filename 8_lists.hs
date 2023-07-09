@@ -77,6 +77,8 @@ findProduct = product [1,2,3,4,5,6,7,8,9,10] --3628800
 -- Map applies an operation to each element in a list
 mapList = map (+1) [1..10] --[2,3,4,5,6,7,8,9,10,11]
 
+mapNames = map fst [("James", 23), ("Simon", 95), ("Samantha", 45)]
+
 -- Filter runs a conditional on each element in list and returns a list of those that were True
 filterList = filter (>5) [1..10] --[6,7,8,9,10]
 filterList2 = filter (== 'e') ['a'..'g'] --"e"

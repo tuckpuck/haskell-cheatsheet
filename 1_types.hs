@@ -3,7 +3,7 @@
 -- To attach them, use :: operator, where you "set the type". The entire line with the :: operator is called the type signature, it is read as "has type of".
 -- The type of any expression, value, or function can be explicitly stated, otherwise it will be inferred by Haskell's compiler.
 -- Every expression's type is known at compile time. If there are types that don't work, the program won't compile.
--- Type checking is the process of verifying and enforcing constraints on data. This helps avoid preventable mistakes. Code behaves more predictably due to the focus on types.
+-- Type checking is the process of verifying and enforcing constraints on data. This helps avoid preventable mistakes. If there is a mismatch, the compiler will throw a "type error". Code behaves more predictably due to the focus on types.
 
 -- * Checking Type
 -- :t command is used to tell what type something is
@@ -43,7 +43,7 @@ mustPassList = expectsList ["New York"] --["Tokyo","New York"]
 -- Char - Values represent unicode characters. Denoted by single quotes 'c'.
 -- String [Char] - Strings represent a list of characters. For string use double quote "string". "Hey" is interchangeable with as ['H', 'e', 'y'].
 
--- * Integral Types
+-- * Integral or Numeric Types
 -- These can be any natural number, both positive or negative
 -- If using a negative number, surround it in parenthesis (-3)
 
@@ -93,14 +93,15 @@ boolAnd = True && False -- Bool
 -- * Char
 -- Char is the type used to represent a unicode character.
 -- These can be letters, numbers, or symbols.
--- If you write a number in quotes, ex '7', it will be treated as Char not a number.
+-- Chars are surrounded by single quotes, ex 'x'
 -- You can only write a single character at a time. 'hi' is not a valid Char. 
+-- If you write a number in single quotes, ex '7', it will be treated as Char instead of a number.
 charType = 'a' --Char
 
 -- * String
 -- Strings are lists of characters. 
 -- Strings are surrounded by double quotes. Can also be expressed as a list of Chars. 
--- String type is the same as [Char] type. 
+-- String type is the same as [Char] type. "hi" is just syntactic sugar, or shorthand, for ['h','i']. 
 -- Because strings are really [Char] lists, these all are essentially equivalent and have the same type:
 stringType = "Tucker" --[Char]
 stringType2 = ['T','u','c','k','e','r'] --[Char]
@@ -117,3 +118,4 @@ length' (x:xs) = 1 + length xs
 -- Fst is another example where 'a' and 'b' are are polymorphic types because the types within the tuple can be any type.
 fst' :: (a, b) -> b
 fst' (_, y) = y
+
