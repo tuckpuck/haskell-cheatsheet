@@ -1,19 +1,20 @@
 import Data.List
 
 -- * Functions
--- Everything that happens in Haskell is based on functions composed together
+-- Functions are the building block of a program. Everything that happens in Haskell is based on functions composed together
+-- Parenthesis are used to prioritize operations. Without parenthesis, operations take place in the order of the precedence (PEMDAS).
+-- Functions have the highest precedence of all operations in Haskell.
+
+-- * Function syntax
 -- Parameters are separated with spaces, both when defining and calling the function
 -- Everything after = is the function body
 -- First letter of a function's name has to be lowercase
--- Parenthesis are used to prioritize calculations
--- Operations take place in the order of the precedence(PEMDAS).
--- Functions have the highest precedence of all operations in Haskell.
 addNums :: Int -> Int -> Int
-addNums x y = x + y 
+addNums x y = x + y
 
 -- * Definitions, Names, or Identifiers (AKA variables in other languages)
--- Definitions are functions that don't take any parameters and return just a specific piece of data. 
--- They are like variables in other languages, but are technically functions.
+-- Definitions are technically functions that don't take any parameters and return just a specific piece of data. 
+-- They are like variables in other languages.
 -- You can supply a type signature to ensure that the provided data is the expected type. 
 -- They are immutable and can't be changed. Because of this they are called identifiers, names, or definitions rather than variables. Setting one is called binding instead of assigning.
 -- If defining a variable in ghci, use let before (ex let a = 1).
@@ -23,6 +24,9 @@ name = "Bob"
 
 myName :: [Char]
 myName = "Tucker Triggs" 
+
+pi :: Double
+pi = 3.14159265358979323846264
 
 -- * Prefix and infix notation
 -- There are two ways to call haskell functions, prefix and infix
@@ -57,6 +61,30 @@ myName = "Tucker Triggs"
 countdown :: [Int] -> [Int]
 countdown x = (reverse . sort) x
 
+-- * Function variations with apostrophe suffix
+-- The suffixing of a an apostrophe ' means one of three things:
+-- 1. a strict version. ex. foldl' is the strict version of foldl
+-- 2. a slightly modified version of a function with a similar name
+-- 3. a helper definition for the purpose of defining the function
+-- 4. a safe version
+
+beginsWithVowel :: String -> Bool
+beginsWithVowel s 
+  | head s == 'a' = True
+  | head s == 'e' = True
+  | head s == 'i' = True
+  | head s == 'o' = True
+  | head s == 'u' = True
+  | head s == 'A' = True
+  | head s == 'E' = True
+  | head s == 'I' = True
+  | head s == 'O' = True
+  | head s == 'U' = True
+  | otherwise = False 
+
+beginsWithVowel' :: String -> Bool
+beginsWithVowel' s  = elem (head s) "AEIOUaeiou"
+
 -- * Safe functions
 -- Often best practice is often to create a safe version of a function
 -- A safe function will handle all cases without breaking program
@@ -74,20 +102,12 @@ getLast [] = Nothing
 getLast [x] = Just x
 getLast (x:xs) = Just (last xs)
 
--- * Function variations with apostrophe suffix
--- The suffixing of a an apostrophe ' means one of three things:
--- 1. a strict version
--- 2. a slightly modified version of a function with a similar name
--- 3. a helper definition for the purpose of defining the function
--- ex. foldl' is the strict version of foldl
-
 -- * Pattern matching
 -- Matching data (values, types, etc) against a pattern
 -- Optionally you can bind variables to successful matches
 -- You must provide pattern matches for all possible scenarios. 
 -- Haskell matches from top to bottom, so the first definition will match the top one if it matches multiple. 
 -- Pattern matching is straightforward to do different things depending on the structure or value of the arguments. Also makes it easy to extract certain values from tuples and lists. 
-
 
 -- Catch-all patterns allow you to provide a default case if a provided param does not match anything else. 
 -- If you don't care what the value will be, you can use _ as the catchall. 
@@ -161,7 +181,12 @@ snd :: (a,b) -> b
 snd (_, b) = b
 
 -- * Currying
--- All functions with multiple arguments are actually currying
+-- Currying is named after Haskell Curry. He came up with a way for a function taking multiple arguments to be transformed into a sequence of functions, each taking a single argument. 
+-- Currying is necessary because Haskell uses Lambda calculus. In lambda calculus, functions can only have one input. Similarly in Haskell, every function only has one input and output. 
+
+-- In this example, the parenthesis are used to separate the input from the function that it is being passed into. 
+power :: Int -> (Int -> Int)
+power x y = x ^ y
 
 -- How currying works within a function
 -- curringEx (Int Int Int) (Int)
@@ -175,27 +200,82 @@ complexCalc x y z = x * y * z * answerToEverything
 -- complexCalc :: Integer -> (Integer -> (Integer -> Integer))
 -- complexCalc 10 20 30 is really ((complexCalc 10) 20) 30
 
--- * If then syntax
--- "If" in haskell must also have "else" because every function must return a value.
+-- * If then else syntax
 -- if <condition>
 --   then <expression1>
 --   else <expression2>
+-- If then else is an expression not a statement. 
+-- "If" in haskell must also have "else" because every function must return a value. 
 
 -- This example multiplies a number by 2 if that number is less than 100. 
 doubleSmallNumber x = if x > 100 
                         then x 
                         else x * 2
 
+-- To check for multiple conditions using if/then/else, you can use nested conditions. 
+type Power = String
+type Pokemon = String
+
+choosepokemon_ifelse :: Power -> Pokemon
+choosepokemon_ifelse  p =
+  if p == "Grass"
+  then "Bulbasaur"
+  else
+    if p == "Fire"
+    then "Charmander"
+    else
+      if p == "Water"
+      then "Squirtle"
+      else "Pikachu"
+
+-- * Case syntax
+-- Execute a specific block of code based on a variable's value
+-- case <Exp> of <Pattern1> -> <Result1>
+--               <Pattern1> -> <Result1>
+--               <Pattern1> -> <Result1>
+
+-- The default value can use any word, like end in this case:
+choosepokemon_case :: Power -> Pokemon
+choosepokemon_case p = case p of
+  "Grass" -> "Bulbasaur"
+  "Fire" -> "Charmander"
+  "Water" -> "Squirtle"
+  end -> "pikachu"
+
+checkForZeroes :: (Int, Int, Int) -> String
+checkForZeroes tuple3 = case tuple3 of
+                          (0, _, _) -> "The first one is a zero!"
+                          (_, 0, _) -> "The second one is a zero!"
+                          (_,_,0) -> "The third one is a zero"
+                          _ -> "Please provide a tuple of"
+
+-- You can do most of the same things using pattern matching, but case statements have the advantage they can be used anywhere an expression can: 
+checkForZeros' :: (Int, Int, Int) -> String
+checkForZeros' tuple3 = "The " ++ show tuple3 ++ " has " ++
+    case tuple3 of
+        (0, _, _) -> "a zero as its first element"
+        (_, 0, _) -> "a zero as its second element"
+        (_, _, 0) -> "a zero as its third element"
+        _  -> "no zeroes!"
+checkzeros = checkForZeros' (32,0,256)
+
 -- * Guard syntax
 -- Guards have similar to properties to if/else, but they are suited for when there are many conditions. 
--- You can create a catchall condition using otherwise. Otherwise is actually just True, which is another way to set up a catchall. 
-
+-- You can create a catchall condition using otherwise. Otherwise is literally just True, which is another way to set up a catchall. You could also just put True instead of otherwise to set up a value. 
 
 -- func arg
 --   | <Condition1> = <Result1>
 --   | <Condition2> = <Result2>
 --   | <Cordition3> = <Result3>
 --   | otherwise = <Result4>
+
+choosepokemon_guard :: Power -> Pokemon
+choosepokemon_guard p
+  | p == "Grass" = "Bulbasaur"
+  | p == "Fire" = "Charmander"
+  | p == "Water" = "Sauirtle"
+  | otherwise = "Pikachu"
+
 
 birthdayCongrats :: Int -> String
 birthdayCongrats age 
@@ -205,8 +285,7 @@ birthdayCongrats age
   | otherwise = "unknown age"
 
 -- * Let/in syntax
--- let expressions are convenient whenever we want to split complex expressions
--- into smaller building blocks that you combine into a final expression.
+-- let expressions are convenient whenever we want to split complex expressions into smaller building blocks that you combine into a final expression.
 -- Expression introduced in a let expression exist only within that let expression.
 
 -- 'Let' is used to create variables or expressions that remain local to that function
@@ -285,31 +364,7 @@ analyzeCylinder diameter height
                 | volume < 1000 = "The cylinder is a tank."
                 | otherwise = "What in the world is that huge thing?!"
               where
-                volume = pi * diameter^2 * height / 4
-
--- Case statement
--- Execute a specific block of code based on a variable's value
--- case <Exp> of <Pattern1> -> <Result1>
---               <Pattern1> -> <Result1>
---               <Pattern1> -> <Result1>
-
-checkForZeroes :: (Int, Int, Int) -> String
-checkForZeroes tuple3 = case tuple3 of
-                          (0, _, _) -> "The first one is a zero!"
-                          (_, 0, _) -> "The second one is a zero!"
-                          (_,_,0) -> "The third one is a zero"
-                          _ -> "Please provide a tuple of"
-
--- You can do most of the same things using pattern matching, but case statements have the advantage they can be used anywhere an expression can: 
-checkForZeros' :: (Int, Int, Int) -> String
-checkForZeros' tuple3 = "The " ++ show tuple3 ++ " has " ++
-    case tuple3 of
-        (0, _, _) -> "a zero as its first element"
-        (_, 0, _) -> "a zero as its second element"
-        (_, _, 0) -> "a zero as its third element"
-        _  -> "no zeroes!"
-checkzeros = checkForZeros' (32,0,256)
-
+                volume = Prelude.pi * diameter^2 * height / 4
 
 -- * More function examples
 plus = (+2) 3
@@ -345,10 +400,6 @@ divideBy a b = a `div` b
 performOp :: (Int -> Int) -> Int -> Int -> Int
 performOp f x y = y * (f x)
 
-beginsWith :: Char -> String -> Bool
-beginsWith _ [] = False
-beginsWith c (x:xs)   = c == x
-
 doubleMe x = x + x
 doubleTen = doubleMe 10
 -- Takes two numbers, multiplies them by 2, and adds them together
@@ -361,5 +412,9 @@ doubleUsAgain x y = doubleMe x + doubleMe y
 fToC x = (x - 32) * 5 / 9
 
 -- Calculate volume of cylinder
-volumeOfACylinder r h = pi * r ^ 2 * h 
+volumeOfACylinder r h = Prelude.pi * r ^ 2 * h 
+
+beginsWith :: Char -> String -> Bool
+beginsWith _ [] = False
+beginsWith c (x:xs)   = c == x
 
