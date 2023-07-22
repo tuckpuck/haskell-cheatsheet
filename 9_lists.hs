@@ -159,6 +159,30 @@ listInListConcat = listInList ++ [[13,14,15,16]] --[[1,2,3,4],[5,6,7,8],[9,10,11
 -- Add another list within a list to the front
 listInListCons = [2,3,5] : listInList --[[2,3,5],[1,2,3,4],[5,6,7,8],[9,10,11,12]]
 
+-- * Lists in memory 
+-- Lists are actually 'linked lists'. At the memory level, this means that not all items `are contiguous, but instead each item gives its value then points to the location of the next item. You have the element, and the location where the next item is stored. The end of the list is represented by a 'null' to show it is the end. 
+-- Ex. [3, 17, -11] is {elem: 3, next: 0x23953241} {elem: 17, next: 0x97336542} {elem: -11, next: null}. 
+-- You can move forward in memory to the next item because you have the next address, but not backward. 
+-- Due to this, you can consider the list only two things: a 'head' and a 'tail'.
+-- Why is it stored like this in Haskell? It is perfect for recursion. And it is easier to find blocks in memory that are not contiguous. 
+-- To calculate the length of the linked list, you must jump through every element in the list. 
+-- Because of this, '!!' and 'last' should be avoided because it is inefficient and the compiler has to go through every element until that one. Unless you are getting one of the first elements, or have a very short list. 
+
+-- * (x:xs) pattern
+-- Because of how lists are stored in memory, it is easy to capture the head and tail.
+-- They typical pattern is x:xs. x is the head, and xs is the tail.
+-- ex. x = [1,2,3,4,5]
+-- a:b = x
+-- a is 1
+-- b is [2,3,4,5]
+
+-- You can also pattern match items following the head item by adding more letters between cons.
+-- ex. y = [5,6,7,8,9]
+-- c:d:e = y
+-- c is 5
+-- d is 6
+-- e is [7,8,9]
+
 -- * Custom List functions
 getFirstLetter :: String -> Char
 getFirstLetter s = s !! 0

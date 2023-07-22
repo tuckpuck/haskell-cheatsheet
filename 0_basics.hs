@@ -123,7 +123,6 @@ using {- and -}
 -- You can also import a library with a different name using the `as` keyword. For example, to import the Data.Map library with a different name `Map`, you would write:
 -- import qualified Data.Map as Map
 
-
 -- * Extensions
 -- Extensions are added first thing in the file
 -- They look like this: {-# language MultiParamTypeClasses #-}
