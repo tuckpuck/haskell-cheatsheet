@@ -100,6 +100,30 @@ using {- and -}
 -- Current standard is Haskell 2010
 -- Previous standard was Haskell 98
 
+-- * Imports
+-- The 'prelude' library is loaded automatically. It is the essential collection of commonly used functions, types, and type classes that are used extensively in Haskell programming.
+-- To use other libraries, you need to have them installed on your system. You can use tools like Cabal or Stack to manage your Haskell dependencies and install libraries.
+
+-- To import other libraries into your Haskell program, you need to use the `import` keyword followed by the name of the library. Here is the general syntax:
+-- import <LibraryName>
+
+-- As a specific example, if you want to import the Data.List module from the base library, you would write:
+-- import Data.List
+
+-- If you want to import a specific function or type from a library, you can specify it using the `()` syntax. For example, to import only the `sort` function from Data.List, you would write:
+-- import Data.List (sort)
+
+-- If you want to import multiple functions or types from a library, you can separate them with commas. For example, to import both `sort` and `group` functions from Data.List, you would write:
+-- import Data.List (sort, group)
+
+-- If you want to import a library with a qualified name, meaning that you need to prefix the imported functions or types with the library name, you can use the `qualified` keyword. For example, to import the Data.Map library with a qualified name, you would write:
+-- import qualified Data.Map
+-- Then, you can access functions or types from Data.Map by prefixing them with `Data.Map`, like `Data.Map.lookup`.
+
+-- You can also import a library with a different name using the `as` keyword. For example, to import the Data.Map library with a different name `Map`, you would write:
+-- import qualified Data.Map as Map
+
+
 -- * Extensions
 -- Extensions are added first thing in the file
 -- They look like this: {-# language MultiParamTypeClasses #-}
