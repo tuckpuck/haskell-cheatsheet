@@ -1,11 +1,4 @@
--- * How lists are constructed
--- Lists are constructed by the : operator, and are decomposed by head and tail functions
-isSame = [1,2,3,4] == 1 : (2 : (3 : (4 :[])))
-
-isSame2 = 2 : (3 : (4 : (5 : (6 : (7 : []))))) == [2,3,4,5,6,7]
-checkHead = head (2 : (3 : (4 : (5 : (6 : (7 : []))))))
-checkTail = tail (2 : (3 : (4 : (5 : (6 : (7 : []))))))
-
+-- * Lists
 -- * Native List Functions
 -- Get a specific element from a list using !!. Starts at index 0. 
 item3 = [1,2,3,4,5,6] !! 2 --3
@@ -76,12 +69,80 @@ findProduct = product [1,2,3,4,5,6,7,8,9,10] --3628800
 
 -- Map applies an operation to each element in a list
 mapList = map (+1) [1..10] --[2,3,4,5,6,7,8,9,10,11]
-
 mapNames = map fst [("James", 23), ("Simon", 95), ("Samantha", 45)]
 
 -- Filter runs a conditional on each element in list and returns a list of those that were True
 filterList = filter (>5) [1..10] --[6,7,8,9,10]
 filterList2 = filter (== 'e') ['a'..'g'] --"e"
+
+-- * List concatenation operators
+-- The cons operator (:) adds an element to the beginning of a list.
+-- Much faster than adding to end of a list (because Haskell then has to go through entire list).
+-- Cons takes an element as first param and list as second. If you try [2,3]:1 it will throw an error.
+-- Cons is short for constructor.
+listOf3 = 1 : [2,3]
+listOf10 = (:) 1 [2..10] --[1,2,3,4,5,6,7,8,9,10]
+listOf1 = (:) 1 [] --[1]
+consString = 'h':"ello" --'hello'
+consList = "hello " : ["world"] --["hello ","world"]
+-- In reality, lists are stored like this 'w':('o':('r':('l':('d':[])))). String syntax is just syntatic sugar. 
+
+-- The ++ operator is used to add two lists together
+combineStrings = "hello" ++ " there"
+combineNumLists = (++) [1..10][11..20] --[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+combineStringLists = ["hello", "world"] ++ ["g","m"] --["hello","world","g","m"]
+combineListsOfLists = [["a", "b"], ["c","f"]] ++ [["m", "h"]]
+
+-- Lists in lists
+-- Lists in lists also have to be of a single type
+listInList = [[1,2,3,4],[5,6,7,8],[9,10,11,12]] --[[1,2,3,4],[5,6,7,8],[9,10,11,12]]
+-- Add another list within a list to end
+listInListConcat = listInList ++ [[13,14,15,16]] --[[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16]]
+-- Add another list within a list to the front
+listInListCons = [2,3,5] : listInList --[[2,3,5],[1,2,3,4],[5,6,7,8],[9,10,11,12]]
+
+-- * How lists are constructed
+-- Lists are really constructed by the : operator, and are decomposed by head and tail functions
+-- The end of the list must end with a null list, so that Haskell knows that it is the end of the list. 
+-- invalidList = 1 : (2 : (3))
+validList = 1 : (2 : (3 : []))
+validList2 = 1 : (2 : ([3]))
+
+isSameDemo = [1,2,3,4] == 1 : (2 : (3 : (4 :[])))
+isSameDemo2 = 2 : (3 : (4 : (5 : (6 : (7 : []))))) == [2,3,4,5,6,7]
+isSameDemo3 = [2,3,4] == 2 : [3,4] && 2 : (3 : [4]) == 2 : (3 : (4 : []))
+checkHead = head (2 : (3 : (4 : (5 : (6 : (7 : []))))))
+checkTail = tail (2 : (3 : (4 : (5 : (6 : (7 : []))))))
+
+-- * (x:xs) pattern
+-- This pattern uses the cons operator to pattern match.
+-- Because of how lists are stored in memory, it is easy to capture the head and tail.
+-- They typical pattern is x:xs. x is the head, and xs is the tail. xs is the plural of x. 
+m:n = [1,2,3,4,5]
+-- m is 1
+-- n is [2,3,4,5]
+
+-- You can also pattern match items following the head item by adding more letters between cons.
+y = [5,6,7,8,9]
+h:i:j = y
+-- h is 5
+-- i is 6
+-- j is [7,8,9]
+
+a:b:c:d:e:f = "world"
+-- a = 'w'
+-- b = 'o'
+-- c = 'r'
+-- d = 'l'
+-- e = "d"
+-- f = ""
+-- The last letter can never be returned as a character via this method.
+-- That is why d is a list, not a char.
+
+-- Underscore is used to show a value is not needed. _ does not change the program execution, it is a note for developers looking at the program. 
+-- ex.
+-- first :: [a] -> a 
+-- first (x:_) = x
 
 -- * List comparison
 -- Lists are compared in lexicographical order. First the first one is compared. Only if they are equal then the second item is compared. That's why this evaluates to True.
@@ -136,29 +197,6 @@ twentyFourMultiplesOfThirteenInfiniteList = take 24 [13,26..] --[13,26,39,52,65,
 -- For example: 
 floatingRange = [0.1,0.3..1] --[0.1,0.3,0.5,0.7,0.8999999999999999,1.0999999999999999]
 
--- * List concatenation operators
--- The cons operator (:) adds an element to the beginning of a list
--- Much faster than adding to end of big list (because Haskell then has to go through entire list)
-listOf3 = 1 : [2,3]
-listOf10 = (:) 1 [2..10] --[1,2,3,4,5,6,7,8,9,10]
-listOf1 = (:) 1 [] --[1]
-consString = 'h':"ello" --'hello'
-consList = "hello " : ["world"] --["hello ","world"]
-
--- The ++ operator is used to add two lists together
-combineStrings = "hello" ++ " there"
-combineNumLists = (++) [1..10][11..20] --[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
-combineStringLists = ["hello", "world"] ++ ["g","m"] --["hello","world","g","m"]
-combineListsOfLists = [["a", "b"], ["c","f"]] ++ [["m", "h"]]
-
--- Lists in lists
--- Lists in lists also have to be of a single type
-listInList = [[1,2,3,4],[5,6,7,8],[9,10,11,12]] --[[1,2,3,4],[5,6,7,8],[9,10,11,12]]
--- Add another list within a list to end
-listInListConcat = listInList ++ [[13,14,15,16]] --[[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16]]
--- Add another list within a list to the front
-listInListCons = [2,3,5] : listInList --[[2,3,5],[1,2,3,4],[5,6,7,8],[9,10,11,12]]
-
 -- * Lists in memory 
 -- Lists are actually 'linked lists'. At the memory level, this means that not all items `are contiguous, but instead each item gives its value then points to the location of the next item. You have the element, and the location where the next item is stored. The end of the list is represented by a 'null' to show it is the end. 
 -- Ex. [3, 17, -11] is {elem: 3, next: 0x23953241} {elem: 17, next: 0x97336542} {elem: -11, next: null}. 
@@ -167,21 +205,6 @@ listInListCons = [2,3,5] : listInList --[[2,3,5],[1,2,3,4],[5,6,7,8],[9,10,11,12
 -- Why is it stored like this in Haskell? It is perfect for recursion. And it is easier to find blocks in memory that are not contiguous. 
 -- To calculate the length of the linked list, you must jump through every element in the list. 
 -- Because of this, '!!' and 'last' should be avoided because it is inefficient and the compiler has to go through every element until that one. Unless you are getting one of the first elements, or have a very short list. 
-
--- * (x:xs) pattern
--- Because of how lists are stored in memory, it is easy to capture the head and tail.
--- They typical pattern is x:xs. x is the head, and xs is the tail.
--- ex. x = [1,2,3,4,5]
--- a:b = x
--- a is 1
--- b is [2,3,4,5]
-
--- You can also pattern match items following the head item by adding more letters between cons.
--- ex. y = [5,6,7,8,9]
--- c:d:e = y
--- c is 5
--- d is 6
--- e is [7,8,9]
 
 -- * Custom List functions
 getFirstLetter :: String -> Char
@@ -204,3 +227,21 @@ getMin lst = minimum lst
 
 checkIfIsInList :: Eq a => a -> [a] -> Bool
 checkIfIsInList item lst = item `elem` lst
+
+first :: [a] -> a 
+first (x:_) = x
+
+second :: [a] -> a
+second (_:y:_) = y
+
+last' :: [a] -> a
+last' [x] = x
+last' (x:xs) = last' xs
+
+last'' :: [a] -> Maybe a
+last'' [] = Nothing
+last'' [x] = Just x
+last'' (x:xs) = last'' xs
+
+
+

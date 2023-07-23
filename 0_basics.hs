@@ -103,6 +103,7 @@ using {- and -}
 -- * Imports
 -- The 'prelude' library is loaded automatically. It is the essential collection of commonly used functions, types, and type classes that are used extensively in Haskell programming.
 -- To use other libraries, you need to have them installed on your system. You can use tools like Cabal or Stack to manage your Haskell dependencies and install libraries.
+-- To find packages to use, look on https://hackage.haskell.org/packages/browse. 
 
 -- To import other libraries into your Haskell program, you need to use the `import` keyword followed by the name of the library. Here is the general syntax:
 -- import <LibraryName>
