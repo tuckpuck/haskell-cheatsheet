@@ -1,4 +1,5 @@
 import Data.List
+import Data.Char
 
 -- * Functions
 -- Functions are the building block of a program. Everything that happens in Haskell is based on functions composed together
@@ -56,10 +57,16 @@ pi = 3.14159265358979323846264
 -- * Function composition
 -- Function composition is passing the output of one function as an input of another function.
 -- . is the function composition operator
+compo = (^2) . (*3) . (+4) $ 7 --same as (^2) ((*) 3 ((+) 4 7))
 
 -- Ex. Result of sort is pipelined to reverse.
 countdown :: [Int] -> [Int]
 countdown x = (reverse . sort) x
+
+-- * Application operator
+-- $ takes a function and a value and produces the result of the application of the function to the value
+-- Lowest priority among operators
+
 
 -- * Function variations with apostrophe suffix
 -- The suffixing of a an apostrophe ' means one of three things:
@@ -205,6 +212,43 @@ analyzeCylinder diameter height
               where
                 volume = Prelude.pi * diameter^2 * height / 4
 
+-- * Higher order functions
+-- Higher-order functions are functions that take other functions as arguments or return functions as results.
+-- Functions are considered first-class citizens, which means they can be treated just like any other value or data type.
+-- f :: Int -> (Int -> Char) is an example of currying, which happens every time there are multiple parameters.
+-- f :: (Int -> Char) -> Char is an example of a function that takes a function as input.
+-- When you see the type definition like (Int -> Int) -> Int it means it is expecting a function to be passed in. 
+-- For example, we can create a 'square' function to calculate squares, then use that function within a new function squares that calculates a the squares of items in a list.
+square' :: Int -> Int
+square' x = x * x
+
+squares :: [Int] -> [Int]
+squares lst = Data.List.map square' lst
+
+hof :: (Int -> Char) -> Int -> Char 
+hof f n = f n 
+-- You'll have to import Data.Char to access this chr function. 'chr' function converts an integer code point into a character.
+showHof = hof chr 99
+
+startWithCapital :: [Char] -> [Char]
+startWithCapital (x:xs) = toUpper x : xs
+
+applyFunctionTwice :: (a -> a) -> a -> a
+applyFunctionTwice f x = f (f x)
+
+twice1 = applyFunctionTwice (^2) 3
+twice2 = applyFunctionTwice Data.List.reverse "hello"
+
+-- Map is a classic example of a higher order function
+-- It is a native function that takes a function that is applied to all elements
+map' :: (a -> b) -> [a] -> [b]
+map' _ [] = []
+map' f (x:xs) = f x : map' f xs
+
+map = map' (+10) [12,34,65]
+map2 = map' Data.Char.toUpper "Hello"
+map3 = map' not [True, False, False]
+
 -- * More function examples
 plus = (+2) 3
 times = (3 *) 4
@@ -219,16 +263,8 @@ add' = \x y -> x + y
 addInt :: (Int,Int) -> Int
 addInt (a,b) = a + b
 
-removeSpaces :: String -> String
-removeSpaces = filter (\x -> x /= ' ')
-
-getFrequency = map (\x -> (head x, length x))
-
 doubleSmallNumberIfLessThan100 :: Int -> Int
 doubleSmallNumberIfLessThan100 x = if x < 100 then x*2 else x
-
-mapString :: Char -> [Char] -> [Bool]
-mapString c x = (filter (==True) (map (>=c) x)) ++ filter (==False) (map (>=c) x)
 
 myEqual :: Eq a => a -> a -> Bool
 myEqual first second = first == second 
