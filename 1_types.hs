@@ -108,14 +108,14 @@ stringType2 = ['T','u','c','k','e','r'] --[Char]
 stringType3 = 'T':'u':'c':'k':'e':'r':[] --[Char]
 
 -- * Type variables aka polymorphism
--- Polymorphic types - A polymorphic value can have multiple types. This is useful in cases where you want to accept multiple types of data, or if the data type is not important (ex. a function that returns the first of two values). 
--- While specific types are capitalized (Bool), polymorphic types are lower case (a, b, c, etc.). 'a' can represent any type, but all variables with the type 'a' must be the same type. Checking the types for fst and snd is a good illustration of this. 
+-- Polymorphic types - A polymorphic value can have multiple types. This is useful in cases where you want to accept multiple types of data, or if the data type is not important (ex. a function like fst that returns the first of two values). 
+-- While specific types are capitalized (Bool), polymorphic types are lower case (a, b, c, etc.). 
+-- 'a' can represent any type, but all variables with the type 'a' must be the same type, and the variables with the type 'b' must be the same type etc. 
 -- The length function uses the 'a' type because the length function can work on multiple types (numbers, lists, etc.).
 length' :: [a] -> Int
 length' [] = 0
 length' (x:xs) = 1 + length xs
 
--- Fst is another example where 'a' and 'b' are are polymorphic types because the types within the tuple can be any type.
+-- Fst is an example where 'a' and 'b' are are polymorphic types because the types within the tuple can be any type.
 fst' :: (a, b) -> b
 fst' (_, y) = y
-
