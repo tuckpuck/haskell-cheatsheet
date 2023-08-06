@@ -241,6 +241,8 @@ twice2 = applyFunctionTwice Data.List.reverse "hello"
 
 -- Map is a classic example of a higher order function
 -- It is a native function that takes a function that is applied to all elements
+-- The length that map returns will be the same as the input
+-- The type that map returns may not be the same as the input
 map' :: (a -> b) -> [a] -> [b]
 map' _ [] = []
 map' f (x:xs) = f x : map' f xs
@@ -248,6 +250,17 @@ map' f (x:xs) = f x : map' f xs
 map = map' (+10) [12,34,65]
 map2 = map' Data.Char.toUpper "Hello"
 map3 = map' not [True, False, False]
+
+-- Filter is another useful higher order function. 
+-- It takes a list and filters some elements based on a qualification you set. 
+-- The length that filter returns may not be the same as the input
+-- The type that filter returns will be the same as the input
+filter' :: (a -> Bool) -> [a] -> [a]
+filter' _ [] = []
+filter' f (x:xs) = if f x == True then x : filter' f xs else filter' f xs
+
+-- Filter is often used with lambda functions because they can be quickly defined to filter what is needed
+filterLambda = filter (\x -> (x * 2) > 800) [1..1000]
 
 -- * More function examples
 plus = (+2) 3
