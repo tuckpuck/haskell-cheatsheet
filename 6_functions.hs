@@ -310,3 +310,11 @@ beginsWith :: Char -> String -> Bool
 beginsWith _ [] = False
 beginsWith c (x:xs)   = c == x
 
+-- Casear Cypher
+caesarCypher :: Int -> String -> String
+caesarCypher displace str = Data.List.map (changeChar displace) str
+
+changeChar :: Int -> Char -> Char
+changeChar displace c = chr ((ord c) + displace)
+
+
