@@ -13,7 +13,8 @@
 -- In haskell, foldr is often more useful due to lazy evaluation. 
 -- Foldr is useful when you are trying to build up a list. 
 -- Foldl is useful when you are trying to reduce the list into a single item. 
--- For operations that are associative (like + for example. they are the same result whether applied from left to right) then the result won't change whether you use foldl or foldr
+-- For operations that are associative (like + or * for example. they are the same result whether applied from left to right) then the result won't change whether you use foldl or foldr. 
+-- Some non-associative operators are - and /.
 
 -- * foldl type: 
 -- foldl :: (b -> a -> b) -> b -> [a] -> b
@@ -38,9 +39,18 @@ sumList' = foldl (\h r -> h + r) 0 [1..100]
 -- Get product using foldr 
 getProduct lst = foldr (\acc x -> acc * x) 1 lst
 
+-- Get length using foldr
+getLength xs = myFoldr (\x n -> 1 + n) 0 xs
 
-myLength = myFoldr (\ x r -> 1 + r) 0
+-- Find frequency using foldr
+getFreq :: Char -> String -> Int 
+getFreq c s = foldr (\x n -> if x == c then n + 1 else n) 0 s
 
+-- * Foldl vs Foldl'
+
+
+
+-- * Other fold examples
 myMap :: (a -> b) -> [a] -> [b]
 myMap f list = foldr (\x xs -> f x : xs) [] list
 
