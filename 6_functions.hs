@@ -29,14 +29,15 @@ myName = "Tucker Triggs"
 pi :: Double
 pi = 3.14159265358979323846264
 
--- * Prefix and infix notation
--- There are two ways to call haskell functions, prefix and infix
-
--- Prefix
+-- * Prefix notation
 -- Prefix is the typical way, by writing the function name then its parameters
 -- prod' x y = x * y
 -- prod' 10 3
 
+-- You can use an infix function as a prefix function by wrapping the operator in parenthesis.
+-- (+) 3 4
+
+-- * Infix notation
 -- Infix
 -- With infix the name of the function comes in between the parameters. 
 -- Infix functions are called operators. Mathematical operators, comparisons, logic, and some list operators are examples of infix functions:
@@ -47,26 +48,30 @@ pi = 3.14159265358979323846264
 
 -- You can use a prefix function as an infix function by adding backticks `` around the prefix function
 -- a `infixFunc` b
-
--- You can use an infix function as a prefix function by adding parenthesis around it.
--- three = (+) 1 2
+-- a `mod` b
 
 -- * Expressions vs statements
--- Expressions evaluate to values, whereas statements perform instructions. Everything in Haskell is an expression, nothing is a statement
+-- Expressions evaluate to values, whereas statements perform instructions. Everything in Haskell is an expression, nothing is a statement.
 
--- * Function composition
+-- * Application operator ($)
+-- Haskell generally promotes the absence of parenthesis.
+-- Every operator is just a function, and each has a priority for execution. 
+--  The $ operator is lowest priority operator so using it allows you to set the order of operations you want. 
+-- It allows you to provide priority through clever application of functions.
+-- What is before the dollar is perceived as the first argument, and what is after is perceived as the second argument. 
+-- It allows for a more concise and readable syntax. 
+
+-- * Function composition operator (.)
+-- Functions can be composed together.
 -- Function composition is passing the output of one function as an input of another function.
--- . is the function composition operator
-compo = (^2) . (*3) . (+4) $ 7 --same as (^2) ((*) 3 ((+) 4 7))
+-- It will apply the rightmost function first, then pipeline them sequentially to the left.
 
--- Ex. Result of sort is pipelined to reverse.
+-- This will apply double, then square: 
+-- (square . double) 7 
+
+-- This will be sorted, then reversed: 
 countdown :: [Int] -> [Int]
 countdown x = (reverse . sort) x
-
--- * Application operator
--- $ takes a function and a value and produces the result of the application of the function to the value
--- Lowest priority among operators
-
 
 -- * Function variations with apostrophe suffix
 -- The suffixing of a an apostrophe ' means one of three things:
@@ -174,7 +179,6 @@ initials first last =
     let firstInit = head first
         secondInit = head last
   in [firstInit] ++ "." ++ [secondInit] ++ "."
-
 
 -- * Where syntax
 -- Where is similar to let/in, except that the function is provided first, then variables and functions are bound with 'where'
