@@ -97,6 +97,13 @@ beginsWithVowel s
 beginsWithVowel' :: String -> Bool
 beginsWithVowel' s  = elem (head s) "AEIOUaeiou"
 
+-- * Maybe 
+-- If you want to be able to return an error of your own making (rather than a generic exception) you can use the Maybe keyword. This will prevent your code from crashing because it returns the Nothing value rather than throwing an exception error that crashes your program. 
+-- Maybe's type is this: data Maybe a = Nothing | Just a
+-- Maybe can accept a polymorphic value into the Just constructor. If you don't have anything to return, you can return Nothing
+div' :: Int -> Int -> Maybe Int
+div' x y = if y == 0 then Nothing else Just (div x y)
+
 -- * Safe functions
 -- Often best practice is often to create a safe version of a function
 -- A safe function will handle all cases without breaking program
