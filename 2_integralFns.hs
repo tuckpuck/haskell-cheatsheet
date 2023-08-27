@@ -49,3 +49,6 @@ negateValue' = negate (-10) --(10)
 isEven = even 10 --True
 -- odd - test whether an Integer value is odd.
 isOdd = odd 10 --False
+
+-- read - read can be used to convert to an integer if you define the type
+convertToInt = read "4" :: Int
