@@ -83,6 +83,9 @@ using {- and -}
 -- GHCup is the Installer for Haskell tools 
 -- HLS is the Haskell Language Server. In VS Code this is part of the Haskell plug-in
 
+-- * Haskell Resources
+-- https://hoogle.haskell.org is used for searching functions and exploring libraries.
+
 -- * Haskell package managers
 -- You can create a new project using cabal, stack, or summoner
 -- You can build using 'cabal build' or 'stack build'
