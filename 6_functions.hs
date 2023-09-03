@@ -104,6 +104,15 @@ beginsWithVowel' s  = elem (head s) "AEIOUaeiou"
 div' :: Int -> Int -> Maybe Int
 div' x y = if y == 0 then Nothing else Just (div x y)
 
+-- Once a piece of data has the Maybe type, you cannot change it back to the original type. 
+
+-- However, you can run functions on it by using the bind convention:
+safediv :: Int -> Int -> Maybe Int 
+safediv _ 0 = Nothing
+safediv a b = Just (a / b)
+
+safediv 12 3 >>= \i -> return (i + 7)
+
 -- * Safe functions
 -- Often best practice is often to create a safe version of a function
 -- A safe function will handle all cases without breaking program
@@ -272,6 +281,10 @@ filter' f (x:xs) = if f x == True then x : filter' f xs else filter' f xs
 
 -- Filter is often used with lambda functions because they can be quickly defined to filter what is needed
 filterLambda = filter (\x -> (x * 2) > 800) [1..1000]
+
+-- * Dynamic dispatch
+-- This is the method by which Haskell knows which way to apply a function to a type for functions that can apply to many types. 
+-- This is because Haskell checks which type an element is before running the function on it. 
 
 -- * More function examples
 plus = (+2) 3
