@@ -1,4 +1,4 @@
--- * Type Info
+-- * Types
 -- Types are like a label that is attached to data that defines and limits what that data can do.
 -- To attach them, use :: operator, where you "set the type". The entire line with the :: operator is called the type signature, it is read as "has type of".
 -- The type of any expression, value, or function can be explicitly stated, otherwise it will be inferred by Haskell's compiler.
