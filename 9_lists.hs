@@ -1,4 +1,3 @@
--- * Lists
 -- * Native List Functions
 -- Get a specific element from a list using !!. Starts at index 0. 
 item3 = [1,2,3,4,5,6] !! 2 --3
